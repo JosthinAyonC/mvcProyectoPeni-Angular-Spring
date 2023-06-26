@@ -1,0 +1,44 @@
+<div class="container" style="background-color: #dfdddd73;">
+    <br>
+    <button *ngIf="isAdmin" class="btn btn-info m-2" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#modal-nuevoRecluso">Agregar carceleareo <i class="bi bi-person-add"></i></button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col"># Cedula</th>
+          <th scope="col">Cargos</th>
+          <th scope="col">Sentencia</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Celda</th>
+          <th scope="col"># Pabellon</th>
+          <th scope="col" *ngIf="isAdmin">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let recluso of reclusos | paginate: { itemsPerPage: 5, currentPage: page };">
+          <td>{{ recluso.cedula }}</td>
+          <td>{{ recluso.cargo }}</td>
+          <td>{{ recluso.sentencia }} Anios</td>
+          <td>{{ recluso.status == "A"? "Activo" : "Inactivo" }}</td>
+          <td>{{recluso.celda?.name}}</td>
+          <td>{{recluso.celda?.pabellon?.id}}</td>
+          <td *ngIf="isAdmin">
+            <div class="d-flex gap-2 ">      
+              <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-confirmacion" (click)="obtenerUsuario(recluso)"><i class="bi bi-trash-fill"></i></a>
+              <a class="btn btn-warning" (click)="obtenerUsuarioId(recluso)"><i class="bi bi-pencil-fill"></i></a>
+            </div>
+        </td>
+        </tr>
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+  
+    <app-nuevo-recluso (reclusoGuardado)="onUsuarioGuardado($event)"></app-nuevo-recluso>
+    
+    <app-modal-confirm-recluso 
+    [idReclusoAEliminar]="reclusoSeleccionado"
+    (eliminarRecluso)="delete($event)"
+    ></app-modal-confirm-recluso>
+     <br>
+  </div>
+  
+  

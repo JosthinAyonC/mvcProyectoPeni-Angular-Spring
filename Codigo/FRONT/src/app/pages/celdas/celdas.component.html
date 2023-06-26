@@ -1,0 +1,38 @@
+
+<div class="container" style="background-color: #dfdddd73;">
+    <br>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col"># celda</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Capacidad</th>
+          <th scope="col">Pabellon perteneciente</th>
+          <th scope="col">Estado</th>
+          <th scope="col">Guardia asignado</th>
+          <th *ngIf="isMod || isAdmin"><th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let celda of celdas | paginate: { itemsPerPage: 5, currentPage: page };">
+          <th scope="row">{{ celda.id }}</th>
+          <td>{{ celda.name }}</td>
+          <td>{{ celda.capacidad }}</td>
+          <td>{{ celda.pabellon?.id }}</td>
+          <td>{{ celda.status == "A"? "Activo" : "Inactivo" }}</td>
+          <td *ngIf="celda.usuarioGuardia">{{ celda.usuarioGuardia.firstname }}</td>
+          <td *ngIf="!celda.usuarioGuardia" style="color: red;">Por asignar</td>
+          <td *ngIf="isMod || isAdmin">
+            <div class="d-flex gap-2 ">      
+              <a *ngIf="!celda.usuarioGuardia" class="btn btn-warning" (click)="agregarGuardia(celda)"><i class="bi bi-pencil-fill"></i> Agregar guardia</a>
+              <a *ngIf="celda.usuarioGuardia" class="btn btn-warning" (click)="agregarGuardia(celda)"><i class="bi bi-pencil-fill"></i> Editar guardia</a>
+            </div>
+        </td>
+        </tr>
+      </tbody>
+    </table>
+    <pagination-controls (pageChange)="page = $event" previousLabel="Anterior" nextLabel="Siguiente"></pagination-controls>
+  
+  </div>
+  
+  

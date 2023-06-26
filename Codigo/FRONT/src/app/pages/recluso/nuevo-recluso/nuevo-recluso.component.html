@@ -1,0 +1,51 @@
+
+<div  class="modal fade" id="modal-nuevoRecluso" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Creacion de nuevo usuario</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <form (ngSubmit)="guardar()" [formGroup]="form">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" formControlName="cedula" id="input-nombre" placeholder="Cedula" required>
+                    <label for="floatingInput" >Cedula</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="number" class="form-control" formControlName="edad" id="input-apellido" placeholder="Edad" required>
+                    <label for="input-apellido" class="form-label">Edad</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="number" class="form-control" formControlName="sentencia" id="input-apellido" placeholder="Sentencia" required>
+                    <label for="input-apellido" class="form-label">Sentencia</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" formControlName="cargo" id="input-apellido" placeholder="Cargos" required>
+                    <label for="input-cargo" class="form-label">Cargos</label>
+                  </div>
+              <div class="mb-3">
+                <label for="input-roles" class="form-label">Celda</label>
+                <select class="form-select" formControlName="celda" id="input-roles">
+                  <option *ngFor="let celda of celdas" [value]="toJson(celda)">{{ celda.name }} capacidad: {{celda.capacidad}}</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="input-estado" class="form-label">Estado</label>
+                <select class="form-select" formControlName="status" id="input-estado">
+                  <option value="A">Activo</option>
+                  <option value="I">Inactivo</option>
+                </select>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

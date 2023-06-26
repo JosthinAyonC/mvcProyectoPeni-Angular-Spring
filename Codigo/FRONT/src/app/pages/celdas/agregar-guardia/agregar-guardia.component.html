@@ -1,0 +1,43 @@
+<div class="container">
+    <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+            <div class="card mb-3">
+              <div class="card-body">
+                <legend class="text-center header">Agregacion de guardia a la celda</legend>
+                <form (ngSubmit)="guardar()" [formGroup]="form">
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" formControlName="name" id="input-nombre"
+                    [readonly]="readonlyMode"  />
+                    <label for="input-nombre" class="form-label">Nombre <i class="bi bi-dash-circle-fill"></i></label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" formControlName="pabellon" id="input-apellido"
+                    placeholder="Username" [readonly]="readonlyMode" />
+                    <label for="input-username" class="form-label">Pabellon<i class="bi bi-dash-circle-fill"></i> </label>
+                  </div>
+                  <div class="mb-3">
+                    <label for="input-roles" class="form-label">Guardia: </label>
+                    <select class="form-select" formControlName="guardia" id="input-roles">
+                        <option *ngFor="let guardia of guardias" [value]="toJson(guardia )"  >
+                            {{ guardia.firstname }} {{ guardia.lastname }}
+                        </option>
+                    </select>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="volver()">
+                      Volver
+                    </button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
+                      Guardar
+                    </button>
+                  </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
